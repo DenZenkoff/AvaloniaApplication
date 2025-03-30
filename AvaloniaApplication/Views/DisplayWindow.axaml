@@ -1,0 +1,221 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:AvaloniaApplication.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="850" d:DesignHeight="500"
+        x:Class="AvaloniaApplication.DisplayWindow"
+        x:DataType="vm:DisplayWindowViewModel"
+        Width="850" Height="450"
+        Title="DisplayWindow">
+  
+  <TabControl TabStripPlacement="Left"
+              Margin="10"
+              Padding="10">
+    <TabItem Header="Modes">
+      <Grid RowDefinitions="5*,*,*">
+        <DataGrid Grid.Row="0"
+                  Margin="20" 
+                  ItemsSource="{Binding Modes}"
+                  SelectedItem="{Binding SelectedMode}" 
+                  GridLinesVisibility="All" 
+                  IsReadOnly="True"
+                  BorderThickness="1" BorderBrush="Gray">
+          <DataGrid.Columns>
+            <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+            <DataGridTextColumn Header="Max Bottle Number" Binding="{Binding MaxBottleNumber}"/>
+            <DataGridTextColumn Header="Max Used Tips" Binding="{Binding MaxUsedTips}"/>
+          </DataGrid.Columns>
+        </DataGrid>
+        
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
+                    Margin="0,0,0,0">
+          <Label Margin="10,17,0,0"
+                 Content="Name:"/>
+          <TextBox Name="tb_Mode_Name"
+                   Width="150"
+                   Height="20"
+                   Text="{Binding SelectedMode.Name}"
+                   IsEnabled="{Binding IsModeEditable}"/>
+          <Label Margin="10,17,0,0"
+                 Content="Max Bottle Number:"/>
+          <TextBox Name="tb_Mode_MaxBottleNumber"                   
+                   Width="100"
+                   Height="20"
+                   Text="{Binding SelectedMode.MaxBottleNumber}"
+                   IsEnabled="{Binding IsModeEditable}"/>
+          <Label Margin="10,17,0,0"
+                 Content="Max Used Tips:"/>
+          <TextBox Name="tb_Mode_MaxUsedTips"                   
+                   Width="100"
+                   Height="20"
+                   Text="{Binding SelectedMode.MaxUsedTips}"
+                   IsEnabled="{Binding IsModeEditable}"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="2"
+                    Orientation="Horizontal"
+                    Margin="20,0,0,0">
+          <Button Name="btn_Mode_Remove"
+                  Margin="10,20,10,0"
+                  Height="40"
+                  Content="Удалить"
+                  HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Center"
+                  VerticalContentAlignment="Center"
+                  Command="{Binding RemoveModeCommand}"/>
+          <Button Name="btn_Mode_Edit"
+                  Margin="10,20,10,0"
+                  Height="40"
+                  Content="Редактировать"
+                  HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Center"
+                  VerticalContentAlignment="Center"
+                  Command="{Binding EditModeCommand}"/>
+          <Button Name="btn_Mode_Add"
+                  Margin="10,20,10,0"
+                  Height="40"
+                  Content="Добавить запись"
+                  HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Center"
+                  VerticalContentAlignment="Center"
+                  Command="{Binding AddModeCommand}"/>
+          <Button Name="btn_Mode_Save"
+                  Margin="10,20,10,0"
+                  Height="40"
+                  Content="Сохранить"
+                  HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Center"
+                  VerticalContentAlignment="Center"
+                  Command="{Binding SaveModeCommand}"/>          
+          <Button Name="btn_Mode_Export"
+                  Margin="10,20,10,0"
+                  Height="40"
+                  Content="Экспорт в Excel"
+                  HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Center"
+                  VerticalContentAlignment="Center"
+                  Command="{Binding ExportModesToExcelCommand}"/>
+        </StackPanel>
+      </Grid>
+    </TabItem>
+    <TabItem Header="Steps">
+      <Grid RowDefinitions="5*,*,*">
+        <DataGrid Grid.Row="0"
+                  Margin="20" 
+                  ItemsSource="{Binding Steps}"
+                  SelectedItem="{Binding SelectedStep}" 
+                  GridLinesVisibility="All" 
+                  IsReadOnly="True"
+                  BorderThickness="1" BorderBrush="Gray">
+          <DataGrid.Columns>
+            <DataGridTextColumn Header="ModeId" Binding="{Binding ModeId}"/>
+            <DataGridTextColumn Header="Timer" Binding="{Binding Timer}"/>
+            <DataGridTextColumn Header="Description" Binding="{Binding Destination}"/>
+            <DataGridTextColumn Header="Speed" Binding="{Binding Speed}"/>
+            <DataGridTextColumn Header="Type" Binding="{Binding Type}"/>
+            <DataGridTextColumn Header="Volume" Binding="{Binding Volume}"/>
+          </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="1">
+          <StackPanel Orientation="Horizontal"
+                      Margin="5">
+            <Label Margin="10,5,0,0"
+                   Content="ModeId:"/>
+            <TextBox Name="tb_Step_ModeId"
+                     Width="100"
+                     Height="20"
+                     Text="{Binding SelectedStep.ModeId}"
+                     IsEnabled="{Binding IsStepEditable}"/>
+            <Label Margin="10,5,0,0"
+                   Content="Timer:"/>
+            <TextBox Name="tb_Step_Timer"
+                     Width="100"
+                     Height="20"
+                     Text="{Binding SelectedStep.Timer}"
+                     IsEnabled="{Binding IsStepEditable}"/>
+            <Label Margin="10,5,0,0"
+                   Content="Description:"/>
+            <TextBox Name="tb_Step_Description"
+                     Width="150"
+                     Height="20"
+                     Text="{Binding SelectedStep.Destination}"
+                     IsEnabled="{Binding IsStepEditable}"/>
+          </StackPanel>
+          <StackPanel Orientation="Horizontal"
+                      Margin="10">
+            <Label Margin="10,5,0,0"
+                   Content="Speed:"/>
+            <TextBox Name="tb_Step_Speed"
+                     Width="100"
+                     Height="20"
+                     Text="{Binding SelectedStep.Speed}"
+                     IsEnabled="{Binding IsStepEditable}"/>
+            <Label Margin="10,5,0,0"
+                   Content="Type:"/>
+            <TextBox Name="tb_Step_Type"
+                     Width="100"
+                     Height="20"
+                     Text="{Binding SelectedStep.Type}"
+                     IsEnabled="{Binding IsStepEditable}"/>
+            <Label Margin="10,5,0,0"
+                   Content="Volume:"/>
+            <TextBox Name="tb_Step_Volume"
+                     Width="100"
+                     Height="20"
+                     Text="{Binding SelectedStep.Volume}"
+                     IsEnabled="{Binding IsStepEditable}"/>
+          </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2"
+                    Orientation="Horizontal"
+                    Margin="20,20,0,0">
+          <Button Name="btn_Step_Remove"
+                  Margin="10,20,10,0"
+                  Height="40"
+                  Content="Удалить"
+                  HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Center"
+                  VerticalContentAlignment="Center"
+                  Command="{Binding RemoveStepCommand}"/>
+          <Button Name="btn_Step_Edit"
+                  Margin="10,20,10,0"
+                  Height="40"
+                  Content="Редактировать"
+                  HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Center"
+                  VerticalContentAlignment="Center"
+                  Command="{Binding EditStepCommand}"/>
+          <Button Name="btn_Step_Add"
+                  Margin="10,20,10,0"
+                  Height="40"
+                  Content="Добавить запись"
+                  HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Center"
+                  VerticalContentAlignment="Center"
+                  Command="{Binding AddStepCommand}"/>
+          <Button Name="btn_Step_Save"
+                  Margin="10,20,10,0"
+                  Height="40"
+                  Content="Сохранить"
+                  HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Center"
+                  VerticalContentAlignment="Center"
+                  Command="{Binding SaveStepCommand}"/>
+          <Button Name="btn_Step_Export"
+                  Margin="10,20,10,0"
+                  Height="40"
+                  Content="Экспорт в Excel"
+                  HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Center"
+                  VerticalContentAlignment="Center"
+                  Command="{Binding ExportStepsToExcelCommand}"/>
+        </StackPanel>
+      </Grid>
+    </TabItem>
+  </TabControl>
+  
+</Window>
